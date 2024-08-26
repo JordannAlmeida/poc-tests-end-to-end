@@ -1,0 +1,21 @@
+# .NET-specific
+*.vshost.exe
+*.user
+*.suo
+*.pdb
+*.log
+bin/
+obj/
+packages/
+.vscode/
+*.vs/
+
+# TypeScript/Vue-specific
+node_modules/
+dist/
+*.tsmap
+*.map
+
+# General
+.DS_Store
+Thumbs.db

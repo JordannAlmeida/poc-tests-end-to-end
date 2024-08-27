@@ -1,7 +1,6 @@
-﻿using BlondDonateApiTest.E2ETest.Factory;
-using Microsoft.Extensions.DependencyInjection;
+﻿using BloodDonateApiTest.E2ETest.Factory;
 
-namespace BlondDonateApiTest.E2ETest.Abstractions
+namespace BloodDonateApiTest.E2ETest.Abstractions
 {
     public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>, IDisposable
     {

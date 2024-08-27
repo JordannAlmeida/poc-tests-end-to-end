@@ -4,8 +4,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blood-donate-api", "blood-donate-api.csproj", "{41BBACCA-38A9-4175-A1A9-7A76B6B5D366}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9} = {A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonateApiTest", "..\BloodDonateApiTest\BloodDonateApiTest.csproj", "{1949032C-B164-4CCA-ABFE-1972D285A848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blood-donate-report-api", "..\blood-donate-report-api\blood-donate-report-api.csproj", "{B1683681-68D7-4A92-B01A-9BFEE29C1C47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodReportApiTest", "..\BloodReportApiTest\BloodReportApiTest.csproj", "{A30C69F0-444D-4499-B024-957F6C899091}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9} = {A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +33,18 @@ Global
 		{1949032C-B164-4CCA-ABFE-1972D285A848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1949032C-B164-4CCA-ABFE-1972D285A848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1949032C-B164-4CCA-ABFE-1972D285A848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1683681-68D7-4A92-B01A-9BFEE29C1C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1683681-68D7-4A92-B01A-9BFEE29C1C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1683681-68D7-4A92-B01A-9BFEE29C1C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1683681-68D7-4A92-B01A-9BFEE29C1C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A30C69F0-444D-4499-B024-957F6C899091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A30C69F0-444D-4499-B024-957F6C899091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A30C69F0-444D-4499-B024-957F6C899091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A30C69F0-444D-4499-B024-957F6C899091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B503E9-6CFF-42ED-9ED3-FE6DDE27D1F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

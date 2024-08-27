@@ -1,4 +1,4 @@
-﻿using blood_donate_api.Models;
+﻿using Domain.Model.Database;
 
 namespace blood_donate_api.Repository.Interfaces
 {

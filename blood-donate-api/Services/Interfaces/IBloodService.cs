@@ -1,5 +1,5 @@
-﻿using blood_donate_api.Models.Requests;
-using blood_donate_api.Models.Responses;
+﻿using Domain.Model.Request;
+using Domain.Model.Response;
 
 namespace blood_donate_api.Services.Interfaces
 {

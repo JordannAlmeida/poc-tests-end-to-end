@@ -1,12 +1,15 @@
-﻿using blood_donate_api.Models.Requests;
-using blood_donate_api.Models.Responses;
+﻿using Domain.Model.Database;
+using Domain.Model.Request;
+using Domain.Model.Response;
 using System.Text.Json.Serialization;
 
-namespace blood_donate_api.Models.SourceGenerator
+namespace Domain.SourceGenerator
 {
     [JsonSerializable(typeof(IEnumerable<RegisterBloodDonateRequest>))]
     [JsonSerializable(typeof(IEnumerable<BloodStockResponse>))]
     [JsonSerializable(typeof(IEnumerable<BloodStockModel>))]
+    [JsonSerializable(typeof(IEnumerable<BloodReportStockResponse>))]
+    [JsonSerializable(typeof(BloodReportStockResponse))]
     [JsonSerializable(typeof(RegisterBloodDonateRequest))]
     [JsonSerializable(typeof(BloodStockResponse))]
     [JsonSerializable(typeof(BloodStockModel))]

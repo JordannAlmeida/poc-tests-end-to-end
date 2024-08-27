@@ -4,14 +4,10 @@ using System.Text.Json;
 
 namespace blood_donate_api.Repository
 {
-    public class CacheRepository : ICacheRepository
+    public class CacheRepository(IDistributedCache cache, ILogger<CacheRepository> logger) : ICacheRepository
     {
-        private readonly IDistributedCache _cache;
-
-        public CacheRepository(IDistributedCache cache)
-        {
-            _cache = cache;
-        }
+        private readonly IDistributedCache _cache = cache;
+        private readonly ILogger<CacheRepository> _logger = logger;
 
         public async Task<bool> TrySetValueAsync<T>(string key, T value, int lifeTimeMinutes, JsonSerializerOptions jsonSerializerOptions)
         {
@@ -21,12 +17,13 @@ namespace blood_donate_api.Repository
             };
             try
             {
-                string serializedObject = JsonSerializer.Serialize<T>(value);
+                string serializedObject = JsonSerializer.Serialize<T>(value, jsonSerializerOptions);
                 await _cache.SetStringAsync(key, serializedObject, options);
                 return true;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error to set value in cache");
                 return false;
             }
         }
@@ -44,6 +41,7 @@ namespace blood_donate_api.Repository
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error to get value in cache");
                 return default;
             }
         }

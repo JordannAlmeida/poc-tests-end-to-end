@@ -1,11 +1,11 @@
-using BlondDonateApiTest.E2ETest.Abstractions;
-using BlondDonateApiTest.E2ETest.Factory;
-using blood_donate_api.Models.Requests;
-using blood_donate_api.Models.Responses;
+using BloodDonateApiTest.E2ETest.Abstractions;
+using BloodDonateApiTest.E2ETest.Factory;
+using Domain.Model.Request;
+using Domain.Model.Response;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace BlondDonateApiTest.E2ETest
+namespace BloodDonateApiTest.E2ETest
 {
     public class BloodDonateE2ETest : BaseIntegrationTest
     {

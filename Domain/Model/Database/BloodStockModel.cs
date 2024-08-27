@@ -1,4 +1,4 @@
-﻿namespace blood_donate_api.Models
+﻿namespace Domain.Model.Database
 {
     public record BloodStockModel(string BloodType, string RhFactor, double Quantity, DateTime DateOfDonate);
 }

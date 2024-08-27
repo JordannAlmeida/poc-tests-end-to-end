@@ -1,5 +1,5 @@
-﻿using blood_donate_api.Models.Requests;
-using blood_donate_api.Services.Interfaces;
+﻿using blood_donate_api.Services.Interfaces;
+using Domain.Model.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blood_donate_api.Controllers
@@ -23,7 +23,7 @@ namespace blood_donate_api.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    app.Logger.LogError(ex, "Error in post endpoint api/blood/register");
                     return Results.Problem("Error to register new donate", "BloodController", 500);
 
                 }
@@ -41,7 +41,7 @@ namespace blood_donate_api.Controllers
                } 
                catch (Exception ex)
                {
-                    Console.WriteLine(ex);
+                    app.Logger.LogError(ex, $"Error in get endpoint api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
                     return Results.Problem("Error to get Stock", "BloodController", 500);
                }
             });

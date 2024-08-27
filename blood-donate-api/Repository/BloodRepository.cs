@@ -1,15 +1,13 @@
 ﻿
-using blood_donate_api.Models;
 using blood_donate_api.Repository.Interfaces;
 using Dapper;
+using Domain.Model.Database;
 
 namespace blood_donate_api.Repository
 {
-    public class BloodRepository : SqlServerDb, IBloodRepository
+    public class BloodRepository(string connectionString, ILogger<BloodRepository> logger) : SqlServerDb(connectionString), IBloodRepository
     {
-        public BloodRepository(string connectionString) : base(connectionString)
-        {
-        }
+        private readonly ILogger<BloodRepository> _logger = logger;
 
         public async Task<IEnumerable<BloodStockModel>> GetBloodStockModelByTypeAndRhFactorAsync(string bloodType, string rhFactor)
         {

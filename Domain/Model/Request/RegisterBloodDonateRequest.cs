@@ -1,4 +1,4 @@
-﻿namespace blood_donate_api.Models.Requests
+﻿namespace Domain.Model.Request
 {
     public record RegisterBloodDonateRequest
     {

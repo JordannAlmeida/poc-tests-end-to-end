@@ -9,7 +9,7 @@ namespace blood_donate_report_api.Service
         private readonly IBloodDonateApi _bloodDonateApi = bloodDonateApi;
         private readonly ILogger<BloodReportService> _logger = logger;
         private readonly string[] _bloodTypes = { "A", "B", "AB", "O" };
-        private readonly string[] _rhFactors = { "+", "-" };
+        private readonly string[] _rhFactors = { "P", "N" };
 
         public async Task<IEnumerable<BloodReportStockResponse?>> GetStockOfAll()
         {
@@ -22,7 +22,7 @@ namespace blood_donate_report_api.Service
                 }
             }
             var responses = await Task.WhenAll(tasks);
-            return responses.Select(response => new BloodReportStockResponse(response.Value.BloodType, response.Value.RhFactor, response.Value.Stock)).ToList();
+            return responses.Select(response => new BloodReportStockResponse(response.Value.BloodType, response.Value.RhFactor, response.Value.Stock));
         }
     }
 }

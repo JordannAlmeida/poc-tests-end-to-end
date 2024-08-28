@@ -1,4 +1,6 @@
 ﻿using blood_donate_report_api;
+using BloodReportApiTest.E2ETest.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -17,8 +19,11 @@ namespace BloodReportApiTest.E2ETest.Factory
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.UseEnvironment("Test");
-            builder.ConfigureTestServices(ReplaceConfigVariables);
+            builder.UseEnvironment("local");
+            builder.ConfigureTestServices(services => {
+                ReplaceConfigVariables(services);
+                RemoveAuthentication(services);
+            });
         }
 
         private void ReplaceConfigVariables(IServiceCollection services)
@@ -29,6 +34,12 @@ namespace BloodReportApiTest.E2ETest.Factory
                 configuration["ElasticConfiguration:uri"] = _elasticsearch.GetConnectionString();
                 configuration["BloodDonateApi:baseAdress"] = $"{_server.Urls[0]}/";
             }
+        }
+
+        private static void RemoveAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication("Test")
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { });
         }
 
         public WireMockServer GetWireMockServer => _server ?? throw new InvalidOperationException("Server is not initialized");

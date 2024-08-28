@@ -1,4 +1,5 @@
 ﻿using BloodDonateApiTest.E2ETest.Factory;
+using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace BloodDonateApiTest.E2ETest.Abstractions
 {
@@ -9,7 +10,10 @@ namespace BloodDonateApiTest.E2ETest.Abstractions
         protected BaseIntegrationTest(IntegrationTestWebAppFactory factory)
         {
             factory.ResetData().Wait();
-            Client = factory.CreateClient();
+            Client = factory.CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
         }
 
         public void Dispose()

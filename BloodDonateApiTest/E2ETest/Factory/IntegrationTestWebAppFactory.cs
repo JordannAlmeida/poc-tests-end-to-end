@@ -1,5 +1,7 @@
 ﻿using BlondDonateContainerTests.Factory;
 using blood_donate_api;
+using BloodDonateApiTest.E2ETest.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -20,8 +22,11 @@ namespace BloodDonateApiTest.E2ETest.Factory
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             _dbContainer.InitializeDatabaseTestContainerAsync().Wait();
-            builder.UseEnvironment("Test");
-            builder.ConfigureTestServices(ReplaceConfigVariables);
+            builder.UseEnvironment("local");
+            builder.ConfigureTestServices(services => {
+                ReplaceConfigVariables(services);
+                RemoveAuthentication(services);
+            });
         }
 
         public async Task ResetData()
@@ -41,6 +46,12 @@ namespace BloodDonateApiTest.E2ETest.Factory
                 configuration["ConnectionStrings:SqlServer"] = _dbContainer.GetConnectionString();
                 configuration["ConnectionStrings:Redis"] = _redisContainer.GetConnectionString();
             }
+        }
+
+        private static void RemoveAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication("Test")
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { });
         }
 
         public Task InitializeAsync()

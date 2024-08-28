@@ -34,7 +34,7 @@ namespace blood_donate_api
             builder.Services.AddSingleton<ICacheRepository, CacheRepository>();
             builder.Services.AddSingleton(new AppJsonSerializerContext());
             builder.Services.AddScoped<IBloodService, BloodService>();
-
+            builder.Services.AddCustomAuthorization();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Host.UseSerilog(LogExtensions.ConfigureLogger);

@@ -27,7 +27,7 @@ namespace blood_donate_api.Controllers
                     return Results.Problem("Error to register new donate", "BloodController", 500);
 
                 }
-            });
+            }).RequireAuthorization();
 
             bloodController.MapGet("/stock", async (string? bloodType, string? rhFactor, [FromServices] IBloodService bloodService) =>
             {
@@ -44,7 +44,7 @@ namespace blood_donate_api.Controllers
                     app.Logger.LogError(ex, $"Error in get endpoint api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
                     return Results.Problem("Error to get Stock", "BloodController", 500);
                }
-            });
+            }).RequireAuthorization();
         }
     }
 }

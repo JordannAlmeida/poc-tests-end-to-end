@@ -3,6 +3,7 @@ using BloodDonateApiTest.E2ETest.Factory;
 using Domain.Model.Request;
 using Domain.Model.Response;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace BloodDonateApiTest.E2ETest
@@ -18,7 +19,7 @@ namespace BloodDonateApiTest.E2ETest
             return new RegisterBloodDonateRequest
             {
                 BloodType = "A",
-                RhFactor = "-",
+                RhFactor = "N",
                 Name = "Manoel Gomes",
                 UniqueCode = "13542765399",
                 Age = 45,
@@ -33,7 +34,7 @@ namespace BloodDonateApiTest.E2ETest
                             new RegisterBloodDonateRequest
                                     {
                                         BloodType = "A",
-                                        RhFactor = "-",
+                                        RhFactor = "N",
                                         Name = "Galvão Bueno",
                                         UniqueCode = "16542765399",
                                         Age = 70,
@@ -43,7 +44,7 @@ namespace BloodDonateApiTest.E2ETest
                             new RegisterBloodDonateRequest
                                     {
                                         BloodType = "A",
-                                        RhFactor = "-",
+                                        RhFactor = "N",
                                         Name = "Silvo Santos",
                                         UniqueCode = "16542725310",
                                         Age = 70,
@@ -53,7 +54,7 @@ namespace BloodDonateApiTest.E2ETest
                             new RegisterBloodDonateRequest
                                     {
                                         BloodType = "B",
-                                        RhFactor = "+",
+                                        RhFactor = "P",
                                         Name = "Fausto Silva",
                                         UniqueCode = "16542735399",
                                         Age = 70,
@@ -108,7 +109,7 @@ namespace BloodDonateApiTest.E2ETest
             }
 
             var bloodType = "A";
-            var rhFactor = "-";
+            var rhFactor = "N";
             var response = await Client.GetAsync($"/api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
             var totalStockDonated = listRequestDonates.Where(x => x.BloodType == bloodType && x.RhFactor == rhFactor).Sum(x => x.Quantity);
             var totalStock = await response.Content.ReadFromJsonAsync<BloodStockResponse>();
@@ -124,17 +125,23 @@ namespace BloodDonateApiTest.E2ETest
 
             foreach (RegisterBloodDonateRequest request in listRequestDonates)
             {
-                await Client.PostAsJsonAsync("/api/blood/register", request);
+                var requestHttp = new HttpRequestMessage(HttpMethod.Post, "/api/blood/register");
+                requestHttp.Headers.Authorization = new AuthenticationHeaderValue("Test");
+                await Client.SendAsync(requestHttp);
             }
 
             var bloodType = "A";
-            var rhFactor = "-";
+            var rhFactor = "N";
             var totalStockDonated = listRequestDonates.Where(x => x.BloodType == bloodType && x.RhFactor == rhFactor).Sum(x => x.Quantity);
 
-            var responseWithoutCache = await Client.GetAsync($"/api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
+            var requestHttpWithoutCache = new HttpRequestMessage(HttpMethod.Get, $"/api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
+            requestHttpWithoutCache.Headers.Authorization = new AuthenticationHeaderValue("Test");
+            var responseWithoutCache = await Client.SendAsync(requestHttpWithoutCache);
             var totalStockWithoutCache = await responseWithoutCache.Content.ReadFromJsonAsync<BloodStockResponse>();
-
-            var responseWithCache = await Client.GetAsync($"/api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
+            
+            var requestHttpWithCache = new HttpRequestMessage(HttpMethod.Get, $"/api/blood/stock?bloodType={bloodType}&rhFactor={rhFactor}");
+            requestHttpWithCache.Headers.Authorization = new AuthenticationHeaderValue("Test");
+            var responseWithCache = await Client.SendAsync(requestHttpWithCache);
             var totalStockWitCache = await responseWithCache.Content.ReadFromJsonAsync<BloodStockResponse>();
 
             Assert.Equal(HttpStatusCode.OK, responseWithoutCache.StatusCode);

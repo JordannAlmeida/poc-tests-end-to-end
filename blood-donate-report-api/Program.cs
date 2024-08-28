@@ -20,17 +20,17 @@ namespace blood_donate_report_api
             {
                 options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
             });
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
             var configuration = builder.Configuration;
 
             builder.Services.AddHttpClient("BloodDonateApi", (client) =>
             {
                 client.BaseAddress = new Uri(configuration.GetSection("BloodDonateApi")["baseAdress"] ?? throw new ArgumentNullException("BloodDonateApi:baseAdress", "must be set in environment variables"));
+                client.Timeout = TimeSpan.FromSeconds(30);
             });
             builder.Services.AddSingleton<IBloodDonateApi, BloodDonateApi>();
             builder.Services.AddScoped<IBloodReportService, BloodReportService>();
-
+            builder.Services.AddSingleton(new AppJsonSerializerContext());
+            builder.Services.AddCustomAuthorization();
             builder.Host.UseSerilog(LogExtensions.ConfigureLogger);
             var app = builder.Build();
             if (app.Environment.IsDevelopment())

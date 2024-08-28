@@ -11,6 +11,8 @@ namespace Domain.SourceGenerator
     [JsonSerializable(typeof(IEnumerable<BloodReportStockResponse>))]
     [JsonSerializable(typeof(BloodReportStockResponse))]
     [JsonSerializable(typeof(RegisterBloodDonateRequest))]
+    [JsonSerializable(typeof(BloodStockResponse[]))]
+    [JsonSerializable(typeof(BloodStockResponse?))]
     [JsonSerializable(typeof(BloodStockResponse))]
     [JsonSerializable(typeof(BloodStockModel))]
     [JsonSerializable(typeof(UserModel))]

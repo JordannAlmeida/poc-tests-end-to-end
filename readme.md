@@ -8,6 +8,10 @@ Esta é uma API de gerenciamento doações de sangue. É apenas uma poc para rea
 ### BloodDonateApiTest - TestContainers
 Os testes de ponta a ponta são realizados no projeto `BloodDonateApiTest` na pasta `E2ETest`. Esses testes garantem que todas as funcionalidades principais da API estejam funcionando corretamente de uma perspectiva do usuário final.
 
+### Diagrama arquitetural:
+
+![Diagrama de Arquitetura](assets/diagramArch.png)
+
 ### Documentação oficial:
 
 [Documentação TestContainers](https://dotnet.testcontainers.org/)
@@ -15,6 +19,8 @@ Os testes de ponta a ponta são realizados no projeto `BloodDonateApiTest` na pa
 [TestContainers dotnet sql server class](https://github.com/testcontainers/testcontainers-dotnet/blob/develop/src/Testcontainers.MsSql/MsSqlContainer.cs)
 
 [TestContainers dotnet redis class](https://github.com/testcontainers/testcontainers-dotnet/blob/develop/src/Testcontainers.Redis/RedisContainer.cs)
+
+[Documentação testes de integração dotnet](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-8.0)
 
 ### Videos sobre o assunto:
 

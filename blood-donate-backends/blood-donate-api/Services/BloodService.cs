@@ -36,9 +36,7 @@ namespace blood_donate_api.Services
             return donateId;
         }
 
-        private double CalculateStock(IEnumerable<BloodStockModel> listBloodDonateByType)
-        {
-            return listBloodDonateByType.Aggregate(0D, (total, curr) => total + curr.Quantity);
-        }
+        private static double CalculateStock(IEnumerable<BloodStockModel> listBloodDonateByType) =>
+            listBloodDonateByType.Aggregate(0D, (total, curr) => total + curr.Quantity);
     }
 }

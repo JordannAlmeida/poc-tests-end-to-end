@@ -1,6 +1,7 @@
 ﻿using blood_donate_api.Services.Interfaces;
 using Domain.Model.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 
 namespace blood_donate_api.Controllers
 {
@@ -8,7 +9,6 @@ namespace blood_donate_api.Controllers
     {
         public static void RegisterBloodController(this WebApplication app)
         {
-
             var bloodController = app.MapGroup("api/blood");
             bloodController.MapPost("/register", async ([FromBody] RegisterBloodDonateRequest request, [FromServices] IBloodService bloodService) =>
             {
